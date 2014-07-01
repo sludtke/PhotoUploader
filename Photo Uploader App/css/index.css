@@ -45,6 +45,14 @@ body {
     width:100%;
 }
 
+#divUploader{
+    display:none;
+}
+
+#divError{
+    color:red;
+}
+
 .content > .result-area > .results {
     margin:20px;
 }
