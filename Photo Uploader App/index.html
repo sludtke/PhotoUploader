@@ -26,7 +26,29 @@
         <title>Photo Tool: Mobile</title>
     </head>
     <body>
-        <div>
+        <div id="divLogin">
+            <table>
+                <tr>
+                    <td>
+                        Username:
+                    </td>
+                    <td>
+                        <input type="text" id="txbUsername" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password:
+                    </td>
+                    <td>
+                        <input type="password" id="txbPassword" />
+                    </td>
+                </tr>
+            </table>
+            <a href="#" class="LoginButton" onClick="LoginUser()">Login</a>
+            <div id="divError"></div>
+        </div>
+        <div id="divUploader">
             <h1 class="SplashText">Photo Tool: Mobile</h1>
             <div id="deviceready" style="display:false;">
                 <button class="button dh" id="capturePhotoButton">Take Photo</button>
