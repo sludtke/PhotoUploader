@@ -48,6 +48,29 @@
             <a href="#" class="LoginButton" onClick="LoginUser()">Login</a>
             <div id="divError"></div>
         </div>
+        <div id="divSiteSelection">
+            <h1>Select a Project</h1>
+            <table>
+                <tr>
+                    <td>
+                        Projects:
+                    </td>
+                    <td>
+                        <select type="text" name="search" id="ddlSites" placeholder="Select a Site" list="searchResults" autocomplete="off"></select>
+                        <datalist id="searchResults">
+                        </datalist>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="refreshProjects()">Refresh</button>
+                    </td>
+                    <td>
+                        <button onclick="forceNext()">Force Next</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div id="divUploader">
             <h1 class="SplashText">Photo Tool: Mobile</h1>
             <div id="deviceready" style="display:false;">
@@ -65,10 +88,9 @@
         </div>
         
         
-        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-        </script>
+        <script type="text/javascript" src="js/Login.js"></script>
     </body>
 </html>
