@@ -23,7 +23,7 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>KEITH TEST PUSH: Photo Tool: Mobile</title>
+        <title>Photo Tool: Mobile</title>
     </head>
     <body>
         <div id="divLogin">
@@ -73,21 +73,38 @@
         </div>
         <div id="divUploader">
             <h1 class="SplashText">Photo Tool: Mobile</h1>
-            <div id="deviceready" style="display:false;">
+            <div data-role="page">
                 <button class="button dh" id="capturePhotoButton">Take Photo</button>
                 <button class="button dh" id="getPhotoFromLibraryButton">Select from Photo Library</button>
                 <button class="button dh" id="getPhotoFromAlbumButton">Select from Photo Album</button>
-                <button class="button dh" id="btnExit">Exit Photo Tool</button>
+                <button class="button dh" id="btnSettings">Settings</button>
             </div>
 
-            <div class="result-area ch50">
-            	<div class="results">
-    				<img style="display:none;margin:5px auto; width:120px; height:120px;" id="smallImage" src="" />
-                </div>
+            <div data-role="page">
+    				<img id="smallImage" style="display:none;margin: 5px auto; width:90%; height:70%;" src="" />
+                    <button id="btnChoseImage" class="button ub" style="display:none;">Upload Image</button>
+                	<button id="btnRedo" class="button ub" style="display:none;">Cancel</button>
 			</div>
+            
+            <div data-role="page">
+                <textarea id="txtDesc" rows='7' class="marginLeftAlign" style="display:none; width:90%;">Enter Description...</textarea>
+                <select id="selDirection" class="space marginLeftAlign dropDown" style="display:none;">
+                    <option value="">Select a Direction...</option>
+                    <option value="0">North</option>
+                    <option value="1">North West</option>
+                    <option value="2">West</option>
+                    <option value="3">South West</option>
+                    <option value="4">South</option>
+                    <option value="5">South East</option>
+                    <option value="6">East</option>
+                    <option value="7">North East</option>
+                    <option value="8">Unknown</option>
+                </select>
+                <input id="dateNow" type="date" class="marginLeftAlign dateControl" style="display:none;" />
+                <button id="submitImage" class="button ub" style="display:none;" onclick="UploadData()">Done</button>
+                <button id="btnCancel" class="button ub" style="display:none;">Cancel</button>
+            </div>
         </div>
-        
-        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
