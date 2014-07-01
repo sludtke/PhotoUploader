@@ -17,17 +17,17 @@
  * under the License.
  */
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+   -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-color: #000000;
+    background-image:linear-gradient(top, #A7A7A7 0%, #000000 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #000000 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #000000 51%);
     background-image:-webkit-gradient(
         linear,
         left top,
@@ -45,18 +45,54 @@ body {
     width:100%;
 }
 
-/* Portrait layout (default) */
-.app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
+.content > .result-area > .results {
+    margin:20px;
+}
+.content > .result-area > .results > .desc {
+    font-size:12px;
+    color:#a7a9ad;
+    margin-top:20px;
     text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+}
+.content > .result-area > .results > .result-info > div:first-of-type {
+    color:#a7a9ad;
+    font-size:20px;
+    float:left;
+    text-align:right;
+    text-shadow: 0 1px 0 #fff;
+}
+.content > .result-area > .results > .result-info > div:first-of-type + div {
+    color:#414349;
+    font-size:20px;
+    margin-left:10px;
+    float:left;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/*separator*/
+.content > .result-area > .separator
+{
+    height: 12px;
+    border: none;
+    background: -moz-linear-gradient(top, rgba(227, 227, 227, 1) 0%, rgba(240, 240, 240, 1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(227, 227, 227, 1)), color-stop(100%, rgba(240, 240, 240, 1)));
+    background: -webkit-linear-gradient(top, rgba(227, 227, 227, 1) 0%, rgba(240, 240, 240, 1) 100%);
+    background: -o-linear-gradient(top, rgba(227, 227, 227, 1) 0%, rgba(240, 240, 240, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(227, 227, 227, 1) 0%, rgba(240, 240, 240, 1) 100%);
+    background: linear-gradient(to bottom, rgba(227, 227, 227, 1) 0%, rgba(240, 240, 240, 1) 100%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 1px;
+}
+
+.ch50 {height:50%;}
+
+.space
+{
+	margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Landscape layout (with min-width) */
@@ -112,4 +148,51 @@ h1 {
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+.button.dh {
+	height:60px;
+    background-color: #00CAFF;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active
+{
+    background: rgba(49, 52, 55, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.button:active,
+.button:hover
+{
+	border: 1px solid #639ecd;
+	background-image: none;
+	background-color: #0076B2;
+    color: #fff;
+    box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.3);
+}
+
+.button
+{
+	border: 1px solid #8d9096;
+    border-radius: 3px;
+    color: White;
+    background: transparent;
+    margin-left:12px;
+    margin-top:12px;
+    width: 140px;
+    height: 32px;
+    display: inline;
+    float: left;
+}
+
+.SplashText
+{
+    background-color:  #FE9400;
+    color: White;
+    font-family: serif;
 }
