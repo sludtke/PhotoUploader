@@ -179,22 +179,25 @@ cameraApp.prototype = {
 
 function UploadData() {
     var smallImage = id('smallImage');
-    //var opts = { img: 'Images/ajax-loader.gif', hide: true, height: 48, width: 48, position: 'center' };
     var imgStr = smallImage.src.toString();
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = imgStr.substring(imgStr.lastIndexOf("/") + 1);
     options.mimeType = "image/jpeg";
+ 	options.chunkedMode = false;
+    options.headers = {
+    }
     fileName = imgStr.substring(imgStr.lastIndexOf("/") + 1) + ".jpg";
     var ft = new FileTransfer();
-    ft.upload(imgStr, "http://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx", win, onFail, options);
+    ft.upload(imgStr, "http://localhost/JsonMobilePhoto/PhotoUpload.aspx", win, onFail, options, true);
+    //http://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx
 }
 
 function win(r) {
     var directionKey = document.getElementById('selDirection').value;
     var desc = document.getElementById('description').value;
-    var date = document.getElementById("datePicker").value;
+    var date = document.getElementById("dateNow").value;
 
     $.ajax({
                type: "GET",
@@ -225,6 +228,21 @@ function win(r) {
            })
 }
 
-function onFail(message) {
-    alert(message);
+function onFail(FileTransferError) {
+    alert("An error has occurred: Code = " + FileTransferError.code);
+      switch (FileTransferError.code) { 
+        case FileTransferError.FILE_NOT_FOUND_ERR: 
+             console.log("Error Type: Photo file not found"); 
+            break; 
+
+        case FileTransferError.INVALID_URL_ERR: 
+             console.log("Error Type: Bad Photo URL"); 
+            break; 
+
+        case FileTransferError.CONNECTION_ERR:
+             console.log("Error Type: Connection error"); 
+            break; 
+    } 
+    console.log("upload error source " + FileTransferError.source);
+    console.log("upload error target " + FileTransferError.target);	
 }
