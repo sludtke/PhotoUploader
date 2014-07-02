@@ -1,5 +1,7 @@
-document.addEventListener("deviceready", onDeviceReady, false);
- 
+//document.addEventListener("deviceready", onDeviceReady, false);
+function onBodyLoad(){       
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
 //functions for a datetime.Now() type call
 // For todays date;
 Date.prototype.today = function () { 
@@ -228,3 +230,5 @@ function win(r) {
 function onFail(message) {
     alert(message);
 }
+
+
