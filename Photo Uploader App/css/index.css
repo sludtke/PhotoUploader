@@ -21,7 +21,8 @@
 }
 
 body {
-    
+    color:white;
+    background-color:black;
 }
 
 #divLogin{
@@ -50,6 +51,29 @@ body {
 .marginLeftAlign
 {
     margin: 15px;
+}
+
+#divHeader
+{
+    background-image:url('../img/LandingBlack.gif');
+    height:50px;
+    width:100%;
+    background-repeat:repeat-x;
+}
+
+#divLogo
+{
+    background-image:url('../img/TrihydroLogoSmall.png');
+    height:126px;
+    width:95%;
+    background-repeat:no-repeat;
+    margin:0 auto;
+}
+
+#divLogoContainer
+{
+    background-color:black;
+    width:100%;
 }
 
 /* Landscape layout (with min-width) */
@@ -172,4 +196,69 @@ h1 {
     background-color:  #FE9400;
     color: White;
     font-family: serif;
+}
+
+.LoginButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6e0012), color-stop(1, #9e0020) );
+	background:-moz-linear-gradient( center top, #6e0012 5%, #9e0020 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6e0012', endColorstr='#9e0020');
+	background-color:#6e0012;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0px;
+	border:1px solid #a82b2b;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:50px;
+	line-height:50px;
+	width:110px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #000000;
+    float:right;
+}
+.LoginButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9e0020), color-stop(1, #6e0012) );
+	background:-moz-linear-gradient( center top, #9e0020 5%, #6e0012 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e0020', endColorstr='#6e0012');
+	background-color:#9e0020;
+}.LoginButton:active {
+	position:relative;
+	top:1px;
+}
+
+.input {
+    display:inline-block;
+    height:30px;
+    font-size:16px;
+    color:white;
+    width:180px;
+    border:1px solid  #ccc;
+    border-width:0px 0px 1px 0px;
+    padding:0px 5px;  
+    outline:none;
+    background-color:black;
+}
+
+.input:hover, .input:focus,
+.input:hover + .right,
+.input:focus + .right {
+    border-color:#4ab5d9;
 }

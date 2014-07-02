@@ -35,13 +35,17 @@
     <body onload="onBodyLoad()">
         <div id="divWrapper">
             <div id="divLogin">
+                <div id="divLogoContainer">
+                	<div id="divLogo"></div>
+                </div>
+                <div id="divHeader"></div>
                 <table>
                     <tr>
                         <td>
                             Username:
                         </td>
                         <td>
-                            <input type="text" id="txbUsername" />
+                            <input type="text" id="txbUsername" class="input" value="sludtke" />
                         </td>
                     </tr>
                     <tr>
@@ -49,11 +53,11 @@
                             Password:
                         </td>
                         <td>
-                            <input type="password" id="txbPassword" />
+                            <input type="password" id="txbPassword" class="input" value="Xx1256970a" />
                         </td>
                     </tr>
                 </table>
-                <button onClick="LoginUser()">Login Real</button>
+                
                 <a href="#" class="LoginButton" onClick="LoginUser()">Login</a>
                 <div id="divError"></div>
             </div>
@@ -65,17 +69,9 @@
                             Projects:
                         </td>
                         <td>
-                            <select type="text" name="search" id="ddlSites" placeholder="Select a Site" list="searchResults" autocomplete="off"></select>
+                            <select type="text" name="search" id="ddlSites" placeholder="Select a Site" list="searchResults" autocomplete="off" onchange="ddlSites_OnChange()"></select>
                             <datalist id="searchResults">
                             </datalist>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onclick="refreshProjects()">Refresh</button>
-                        </td>
-                        <td>
-                            <button onclick="forceNext()">Force Next</button>
                         </td>
                     </tr>
                 </table>
