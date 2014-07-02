@@ -42,7 +42,7 @@
                             Username:
                         </td>
                         <td>
-                            <input type="text" id="txbUsername" class="input" />
+                            <input type="text" id="txbUsername" class="input" value="sludtke" />
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                             Password:
                         </td>
                         <td>
-                            <input type="password" id="txbPassword" class="input" />
+                            <input type="password" id="txbPassword" class="input" value="Xx1256970a" />
                         </td>
                     </tr>
                 </table>
@@ -66,17 +66,9 @@
                             Projects:
                         </td>
                         <td>
-                            <select type="text" name="search" id="ddlSites" placeholder="Select a Site" list="searchResults" autocomplete="off"></select>
+                            <select type="text" name="search" id="ddlSites" placeholder="Select a Site" list="searchResults" autocomplete="off" onchange="ddlSites_OnChange()"></select>
                             <datalist id="searchResults">
                             </datalist>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onclick="refreshProjects()">Refresh</button>
-                        </td>
-                        <td>
-                            <button onclick="forceNext()">Force Next</button>
                         </td>
                     </tr>
                 </table>
