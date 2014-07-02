@@ -32,13 +32,17 @@
     <body onload="onBodyLoad()">
         <div id="divWrapper">
             <div id="divLogin">
+                <div id="divLogoContainer">
+                	<div id="divLogo"></div>
+                </div>
+                <div id="divHeader"></div>
                 <table>
                     <tr>
                         <td>
                             Username:
                         </td>
                         <td>
-                            <input type="text" id="txbUsername" />
+                            <input type="text" id="txbUsername" class="input" />
                         </td>
                     </tr>
                     <tr>
@@ -46,11 +50,11 @@
                             Password:
                         </td>
                         <td>
-                            <input type="password" id="txbPassword" />
+                            <input type="password" id="txbPassword" class="input" />
                         </td>
                     </tr>
                 </table>
-                <button onClick="LoginUser()">Login Real</button>
+                
                 <a href="#" class="LoginButton" onClick="LoginUser()">Login</a>
                 <div id="divError"></div>
             </div>
