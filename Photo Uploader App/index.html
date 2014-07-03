@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
 -->
 <html>
     <head>
@@ -33,7 +33,7 @@
         <div id="divWrapper">
             <div id="divLogin">
                 <div id="divLogoContainer">
-                	<div id="divLogo"></div>
+                    <div id="divLogo"></div>
                 </div>
                 <div id="divHeader"></div>
                 <table>
@@ -54,10 +54,11 @@
                         </td>
                     </tr>
                 </table>
-                
+
                 <a href="#" class="LoginButton" onClick="LoginUser()">Login</a>
                 <div id="divError"></div>
             </div>
+          
             <div id="divSiteSelection">
                 <h1>Select a Project</h1>
                 <table>
@@ -72,40 +73,35 @@
                         </td>
                     </tr>
                 </table>
+                <label id="lblCamera" class="standardButton hugeButton" style="margin-top:40px;">
+                    <input id="cameraPhoto" type="file" accept="image/*" capture="camera" class="hugeButton" style="display:none;"/>Take or Select Photo
+                </label>
             </div>
-            <div id="divUploader">
-                <h1 class="SplashText">Photo Tool: Mobile</h1>
-                <div data-role="page">
-                    <button class="button dh" id="capturePhotoButton">Take Photo</button>
-                    <button class="button dh" id="getPhotoFromLibraryButton">Select from Photo Library</button>
-                    <button class="button dh" id="getPhotoFromAlbumButton">Select from Photo Album</button>
-                    <button class="button dh" id="btnSettings">Settings</button>
-                </div>
 
-                <div data-role="page">
-        				<img id="smallImage" style="display:none;margin: 5px auto; width:90%; height:70%;" src="" />
-                        <button id="btnChoseImage" class="button ub" style="display:none;">Upload Image</button>
-                    	<button id="btnRedo" class="button ub" style="display:none;">Cancel</button>
-    			</div>
-                
-                <div data-role="page">
-                    <textarea id="txtDesc" rows='7' class="marginLeftAlign" style="display:none; width:90%;">Enter Description...</textarea>
-                    <select id="selDirection" class="space marginLeftAlign dropDown" style="display:none;">
-                        <option value="">Select a Direction...</option>
-                        <option value="0">North</option>
-                        <option value="1">North West</option>
-                        <option value="2">West</option>
-                        <option value="3">South West</option>
-                        <option value="4">South</option>
-                        <option value="5">South East</option>
-                        <option value="6">East</option>
-                        <option value="7">North East</option>
-                        <option value="8">Unknown</option>
-                    </select>
-                    <input id="dateNow" type="date" class="marginLeftAlign dateControl" style="display:none;" />
-                    <button id="submitImage" class="button ub" style="display:none;" onclick="UploadData()">Done</button>
-                    <button id="btnCancel" class="button ub" style="display:none;">Cancel</button>
-                </div>
+            <div data-role="page">
+                <img id="smallImage" style="display:none;margin: 5px auto; width:90%; height:70%;" src="" />
+                <input type="file" id="files" name="files[]" multiple style="display:none;"/>
+                <button id="btnChoseImage" class="standardButton wideButton" style="display:none;">Upload Image</button>
+                <button id="btnRedo" class="standardButton wideButton" style="display:none;">Cancel</button>
+            </div>
+
+            <div data-role="page">
+                <textarea id="txtDesc" rows='7' class="marginLeftAlign" style="display:none; width:90%;">Enter Description...</textarea>
+                <select id="selDirection" class="space marginLeftAlign dropDown" style="display:none;">
+                    <option value="">Select a Direction...</option>
+                    <option value="0">North</option>
+                    <option value="1">North West</option>
+                    <option value="2">West</option>
+                    <option value="3">South West</option>
+                    <option value="4">South</option>
+                    <option value="5">South East</option>
+                    <option value="6">East</option>
+                    <option value="7">North East</option>
+                    <option value="8">Unknown</option>
+                </select>
+                <input id="dateNow" type="date" class="marginLeftAlign dateControl" style="display:none;" />
+                <button id="submitImage" class="standardButton wideButton" style="display:none;" onclick="CommenceUpload()">Done</button>
+                <button id="btnCancel" class="standardButton wideButton" style="display:none;">Cancel</button>
             </div>
         </div>
     </body>

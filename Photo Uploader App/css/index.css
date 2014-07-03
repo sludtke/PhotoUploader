@@ -1,50 +1,56 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-* {
-   -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements.  See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.  The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.  You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied.  See the License for the
+* specific language governing permissions and limitations
+* under the License.
+*/
+*
+{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
-body {
-    color:white;
-    background-color:black;
+body
+{
+    color: white;
+    background-color: black;
 }
 
-#divLogin{
+#divLogin
+{
     
 }
 
-#divUploader{
-    display:none;
+#divUploader
+{
+    display: none;
 }
 
-#divSiteSelection{
-    display:none;
+#divSiteSelection
+{
+    display: none;
 }
 
-#divWrapper{
-    width:100%;
-    height:100%;
+#divWrapper
+{
+    width: 100%;
+    height: 100%;
 }
 
 .space
 {
-	margin-top: 10px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -55,82 +61,87 @@ body {
 
 #divHeader
 {
-    background-image:url('../img/LandingBlack.gif');
-    height:50px;
-    width:100%;
-    background-repeat:repeat-x;
+    background-image: url('../img/LandingBlack.gif');
+    height: 50px;
+    width: 100%;
+    background-repeat: repeat-x;
 }
 
 #divLogo
 {
-    background-image:url('../img/TrihydroLogoSmall.png');
-    height:126px;
-    width:95%;
-    background-repeat:no-repeat;
-    margin:0 auto;
+    background-image: url('../img/TrihydroLogoSmall.png');
+    height: 126px;
+    width: 95%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
 }
 
 #divLogoContainer
 {
-    background-color:black;
-    width:100%;
+    background-color: black;
+    width: 100%;
 }
 
 /* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
+@media screen and (min-aspect-ratio: 1/1) and (min-width: 400px)
+{
+    .app
+    {
+        background-position: left center;
+        padding: 75px 0px 75px 170px; /* padding-top + padding-bottom + text area = image height */
+        margin: -90px 0px 0px -198px; /* offset vertical: half of image height */
+        /* offset horizontal: half of image width and text area width */
     }
 }
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+h1
+{
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0px;
+    overflow: visible;
+    padding: 0px;
+    text-align: center;
 }
 
-
-
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+.event
+{
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin: 0px 30px;
+    padding: 2px 0px;
 }
 
-.event.listening {
-    background-color:#333333;
-    display:block;
+.event.listening
+{
+    background-color: #333333;
+    display: block;
 }
 
-.event.received {
-    background-color:#4B946A;
-    display:none;
+.event.received
+{
+    background-color: #4B946A;
+    display: none;
 }
 
 @keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+from { opacity: 1.0; }
+50% { opacity: 0.4; }
+to { opacity: 1.0; }
 }
  
 @-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+from { opacity: 1.0; }
+50% { opacity: 0.4; }
+to { opacity: 1.0; }
 }
  
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
+.blink
+{
+    animation: fade 3000ms infinite;
+    -webkit-animation: fade 3000ms infinite;
 }
 
 .dateControl
@@ -143,122 +154,135 @@ h1 {
     text-align: center;
 }
 
-.button.dh {
-	height:90px;
-    background-color: #00CAFF;
-    font-size: large; 
-}
-
-.button.ub{
-    height:40px;
-    width:91%;
-    margin-left:15px;
-    background-color: #00CAFF;
-}
-
-.button:disabled,
-.button:disabled:hover,
-.button:disabled:active
+.wideButton
 {
-    background: rgba(49, 52, 55, 0.1);
-    color: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    height: 50px;
+    width: 95%;
+    line-height: 50px;
+    margin-bottom: 10px;
 }
 
-.button:active,
-.button:hover
+.hugeButton
 {
-	border: 1px solid #639ecd;
-	background-image: none;
-	background-color: #0076B2;
-    color: #fff;
-    box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.3);
-    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.3);
+    height: 90px; 
+    width: 95%;
+    line-height: 90px;
+    margin-bottom: 60px;
 }
 
-.button
+.standardButton
 {
-	border: 1px solid #8d9096;
-    border-radius: 3px;
-    color: White;
-    background: transparent;
-    margin-left:12px;
-    margin-top:12px;
-    width: 140px;
-    height: 32px;
-    display: inline;
-    float: left;
+    -moz-box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6e0012), color-stop(1, #9e0020) );
+    background: -moz-linear-gradient( center top, #6e0012 5%, #9e0020 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6e0012', endColorstr='#9e0020');
+    background-color: #6e0012;
+    -webkit-border-top-left-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    border-top-left-radius: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -moz-border-radius-topright: 20px;
+    border-top-right-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    -moz-border-radius-bottomright: 20px;
+    border-bottom-right-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-left-radius: 20px;
+    text-indent: 0px;
+    border: 1px solid #a82b2b;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: large;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    text-shadow: 1px 1px 0px #000000;
+    margin-left: 10px;
 }
-
-.SplashText
+.standardButton:hover
 {
-    background-color:  #FE9400;
-    color: White;
-    font-family: serif;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9e0020), color-stop(1, #6e0012) );
+    background: -moz-linear-gradient( center top, #9e0020 5%, #6e0012 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e0020', endColorstr='#6e0012');
+    background-color: #9e0020;
+}.standardButton:active
+{
+    position: relative;
+    top: 1px;
 }
 
-.LoginButton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
-	box-shadow:inset 0px 1px 0px 0px #fce2c1;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6e0012), color-stop(1, #9e0020) );
-	background:-moz-linear-gradient( center top, #6e0012 5%, #9e0020 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6e0012', endColorstr='#9e0020');
-	background-color:#6e0012;
-	-webkit-border-top-left-radius:20px;
-	-moz-border-radius-topleft:20px;
-	border-top-left-radius:20px;
-	-webkit-border-top-right-radius:20px;
-	-moz-border-radius-topright:20px;
-	border-top-right-radius:20px;
-	-webkit-border-bottom-right-radius:20px;
-	-moz-border-radius-bottomright:20px;
-	border-bottom-right-radius:20px;
-	-webkit-border-bottom-left-radius:20px;
-	-moz-border-radius-bottomleft:20px;
-	border-bottom-left-radius:20px;
-	text-indent:0px;
-	border:1px solid #a82b2b;
-	display:inline-block;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-	height:50px;
-	line-height:50px;
-	width:110px;
-	text-decoration:none;
-	text-align:center;
-	text-shadow:1px 1px 0px #000000;
-    float:right;
+.LoginButton
+{
+    -moz-box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6e0012), color-stop(1, #9e0020) );
+    background: -moz-linear-gradient( center top, #6e0012 5%, #9e0020 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6e0012', endColorstr='#9e0020');
+    background-color: #6e0012;
+    -webkit-border-top-left-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    border-top-left-radius: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -moz-border-radius-topright: 20px;
+    border-top-right-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    -moz-border-radius-bottomright: 20px;
+    border-bottom-right-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-left-radius: 20px;
+    text-indent: 0px;
+    border: 1px solid #a82b2b;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    height: 50px;
+    line-height: 50px;
+    width: 110px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #000000;
+    float: right;
 }
-.LoginButton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9e0020), color-stop(1, #6e0012) );
-	background:-moz-linear-gradient( center top, #9e0020 5%, #6e0012 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e0020', endColorstr='#6e0012');
-	background-color:#9e0020;
-}.LoginButton:active {
-	position:relative;
-	top:1px;
+.LoginButton:hover
+{
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9e0020), color-stop(1, #6e0012) );
+    background: -moz-linear-gradient( center top, #9e0020 5%, #6e0012 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e0020', endColorstr='#6e0012');
+    background-color: #9e0020;
+}.LoginButton:active
+{
+    position: relative;
+    top: 1px;
 }
 
-.input {
-    display:inline-block;
-    height:30px;
-    font-size:16px;
-    color:white;
-    width:180px;
-    border:1px solid  #ccc;
-    border-width:0px 0px 1px 0px;
-    padding:0px 5px;  
-    outline:none;
-    background-color:black;
+.input
+{
+    display: inline-block;
+    height: 30px;
+    font-size: 16px;
+    color: white;
+    width: 180px;
+    border: 1px solid  #ccc;
+    border-width: 0px 0px 1px 0px;
+    padding: 0px 5px; 
+    outline: none;
+    background-color: black;
 }
 
 .input:hover, .input:focus,
 .input:hover + .right,
-.input:focus + .right {
-    border-color:#4ab5d9;
+.input:focus + .right
+{
+    border-color: #4ab5d9;
 }

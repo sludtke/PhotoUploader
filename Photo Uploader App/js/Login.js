@@ -60,7 +60,7 @@ function forceNext(){
 }
 
 function ddlSites_OnChange(){
-	$('#divSiteSelection').hide();
+	//$('#divSiteSelection').hide();
     $('#divUploader').show();  
     selectedSite = $('#ddlSites').val();
 }
