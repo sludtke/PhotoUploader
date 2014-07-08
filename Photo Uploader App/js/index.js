@@ -1,4 +1,3 @@
-//document.addEventListener("deviceready", onDeviceReady, false);
 function onBodyLoad() {       
     document.addEventListener("deviceready", onDeviceReady, false);
 }
@@ -63,20 +62,19 @@ cameraApp.prototype = {
         that._pictureSource = navigator.camera.PictureSourceType;
         that._destinationType = navigator.camera.DestinationType;
         //phonegap
-        id("cameraPhoto").addEventListener("click", function() {
+        $('#cameraPhoto').bind("click", function() {
             that._takePhoto.apply(that, arguments);
         });
-        //non-phonegap
-        /* id("cameraPhoto").addEventListener("change", function() {
-        that._onPhotoTaken.apply(that, arguments);
-        });*/
-        id("btnChoseImage").addEventListener("click", function() {
+        $('#btnChoseImage').bind("click", function() {
             that._photoAccepted.apply(that, arguments);            
         });
-        id("btnRedo").addEventListener("click", function() {
+        $('#btnTakeImage').bind("click", function(){
+           that._capturePhoto.apply(that, arguments);
+        });
+        $('#btnRedo').bind("click", function() {
             that._cancelCapture.apply(that, arguments);            
         });	        
-        id("btnCancel").addEventListener("click", function() {
+        $('#btnCancel').bind("click", function() {
             that._cancelCapture.apply(that, arguments);            
         });	        
     },
@@ -90,60 +88,48 @@ cameraApp.prototype = {
         }, function() {
             cameraApp._onFail.apply(that, arguments);
         }, {
-                                        quality: 40,
-                                        destinationType: navigator.camera.FILE_URI,//cameraApp._destinationType.FILE_URI,
-                                        encodingType : navigator.camera.EncodingType.JPEG, 
-                                        targetWidth: 500,
-                                        targetHeight: 500,
-                                        saveToPhotoAlbum: 1,
-                                        sourceType: that._pictureSource.SAVEDPHOTOALBUM
-                                    });
+                quality: 40,
+                destinationType: navigator.camera.FILE_URI,
+                encodingType : navigator.camera.EncodingType.JPEG, 
+                sourceType: that._pictureSource.SAVEDPHOTOALBUM
+            });
     },
     
     _onPhotoTaken: function(source) {
-        //nonphonegap
-        /* if (source.target.files.length === 1 &&
-        source.target.files[0].type.indexOf("image/") === 0) {*/
-        //used by both
-        var smallImage = id('smallImage');
-        smallImage.style.display = "block";
-        smallImage.src = source; //URL.createObjectURL(source.target.files[0]); //non-phonegap source
+        //var smallImage = ;
+        $('#smallImage').css("display", "block");
+        $('#smallImage').attr("src", source);
         $('#divSiteSelection').hide();
-        id('btnChoseImage').style.display = "block";
-        id('btnRedo').style.display = "block";
-        //}
+        $('#divViewPhoto').show();
     },
    
     //both
     _photoAccepted: function() {
-        id('smallImage').style.display = "none";
-        id('btnChoseImage').style.display = "none";
-        id('btnRedo').style.display = "none";
-        id('dateNow').style.display = "block";
-        id('dateNow').valueAsDate = new Date().today();
-        id('txtDesc').style.display = "block";
-        id('selDirection').style.display = "block";
-        id('submitImage').style.display = "block";
-        id('btnCancel').style.display = "block";
+        $('#divViewPhoto').hide();
+        $('#divUploadPhoto').show();
+        $('#dateNow').valueAsDate = new Date().today();
     },
     
-    //both
+    _capturePhoto: function() {
+        var that = this;
+        
+        // Take picture using device camera and retrieve image as base64-encoded string.
+        navigator.camera.getPicture(onPhotoDataSuccess,
+        function(){
+            that._onFail.apply(that,arguments);
+        },{
+            quality: 50,
+            destinationType: that._destinationType.DATA_URL
+        });
+    },
+    
     _cancelCapture: function() {
-        document.getElementById('smallImage').src = "";
-        var desc = $("#txtDesc");
-        desc.val("");
-        var sel = $("#selDirection");
-        sel.val('0');
-        var date = $("#dateNow"); 
-        date.val("");
-        id('smallImage').style.display = "none";
-        id('btnChoseImage').style.display = "none";
-        id('dateNow').style.display = "none";
-        id('txtDesc').style.display = "none";
-        id('selDirection').style.display = "none";
-        id('submitImage').style.display = "none";
-        id('btnCancel').style.display = "none";
-        id('btnRedo').style.display = "none";
+        $('#smallImage').attr("src", "");
+        $("#txtDesc").val("");
+        $("#selDirection").val('0');
+        $("#dateNow").val("");
+        $('#divUploadPhoto').hide();
+        $('#divViewPhoto').hide();
         $('#divSiteSelection').show();
     },
     
@@ -153,37 +139,17 @@ cameraApp.prototype = {
     }
 }
 
-//non-phonegap
-/*function CommenceUpload() {
-var files = id('cameraPhoto').files
-if (typeof files !== "undefined") {
-for (var i = 0, l = files.length; i < l; i++) {
-UploadFile(files[i]);
-}
-}
-}
-
-function UploadFile(file) {
-var xhr = new XMLHttpRequest();
-xhr.addEventListener("load", function () {//Image is on other side, may not be correkt
-commitPhotoData(fileName);
-}, false);
-var fileName = file.name;
-xhr.open('POST', 'http://10.10.11.81/JsonMobilePhoto/PhotoUpload.aspx', true);
-//xhr.open('POST', 'http://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx', true);
-xhr.setRequestHeader("Content-Type", "multipart/form-data");
-xhr.setRequestHeader("X-File-Name", file.name);
-xhr.setRequestHeader("X-File-Size", file.size);
-xhr.setRequestHeader("X-File-Type", file.type);
-xhr.send(file);
-}*/
-
-//phonegap
 var retries = 0;
 
+function onPhotoDataSuccess(imageData){
+    $('#smallImage').show();
+    $('#smallImage').attr("src", "data:image/jpeg;base64," + imageData);
+    $('#divSiteSelection').hide();
+    $('#divViewPhoto').show();
+}
+
 function CommenceUpload() {
-    var smallImage = id('smallImage');
-    var imgStr = smallImage.src.toString();
+    var imgStr = $('#smallImage').attr("src");
     var fileName = imgStr.substring(imgStr.lastIndexOf("/") + 1);
     
     if (fileName.indexOf(".jpg") == -1)
@@ -231,20 +197,18 @@ function CommenceUpload() {
             params.name = options.fileName;
    options.params = params;
     var ft = new FileTransfer();
-    //ft.upload(imgStr, encodeURI("http://10.10.11.81/JsonMobilePhoto/PhotoUpload.aspx"), win, onFail, options, true);
     ft.upload(imgStr, "http://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx", win, onFail, options, true);
 }
 
-//both
+
 function commitPhotoData(fileName) {
-    var directionKey = document.getElementById('selDirection').value;
-    var desc = document.getElementById('txtDesc').value;
+    var directionKey = $('#selDirection').val();
+    var desc = $('#txtDesc').val()
     var date = $('#dateNow').val();
     var ddlSites = $('#ddlSites').val();
     $.ajax({
                type: "GET",
-        	   url: "http://monoservicetest.trihydro.com/MobilePhoto/PhotoService.svc/UploadPhoto",
-               //url: "http://10.10.11.81/JsonMobilePhoto/PhotoService.svc/UploadPhotoInfo",
+        	   url: "http://monoservicetest.trihydro.com/MobilePhoto/PhotoService.svc/UploadPhotoInfo",
                headers: {'Authentication':token},
                data: { projectKey: ddlSites, directionKey: directionKey, photographer: "Keith", description: desc, filename: fileName, date: date },
                contentType: "application/json; charset=utf-8",
@@ -257,9 +221,9 @@ function commitPhotoData(fileName) {
                        alert("Hit Service, Failed to save Server Side.");
                    }
                },
-               error: function () {
+               error: function (xhRequest, ErrorText, thrownError) {
                    $('#btnCancel').click();
-                   alert("Failed to send PhotoData.");
+                   alert("Failed to send PhotoData. " + ErrorText);
                },
            })
 }

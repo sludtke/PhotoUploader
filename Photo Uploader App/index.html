@@ -20,8 +20,6 @@ under the License.
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <!--<meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Photo Tool: Mobile</title>
         <script src="js/jquery.js"></script>
@@ -61,34 +59,22 @@ under the License.
           
             <div id="divSiteSelection">
                 <h1>Select a Project</h1>
-                <table>
-                    <tr>
-                        <td>
-                            Projects:
-                        </td>
-                        <td>
-                            <select type="text" name="search" id="ddlSites" placeholder="Select a Site" list="searchResults" autocomplete="off" onchange="ddlSites_OnChange()"></select>
-                            <datalist id="searchResults">
-                            </datalist>
-                        </td>
-                    </tr>
-                </table>
-                 <a href="#" id="cameraPhoto" class="standardButton hugeButton">Select a Photo</a>
-               <!-- <label id="lblCamera" class="standardButton hugeButton" style="margin-top:40px;">
-                    <input id="cameraPhoto" type="file" accept="image/*" capture="camera" class="hugeButton" style="display:none;"/>Take or Select Photo
-                </label>-->
+                <div class="center">
+                	<select type="text" name="search" id="ddlSites" placeholder="Select a Site" autocomplete="off" onchange="ddlSites_OnChange()"></select>
+                </div>
+                <a href="#" id="cameraPhoto" class="standardButton wideButton">Select a Photo</a>
+                <a href="#" id="btnTakeImage" class="standardButton wideButton">Take Image</a>
             </div>
 
-            <div data-role="page">
-                <img id="smallImage" style="display:none;margin: 5px auto; width:90%; height:70%;" src="" />
-                <input type="file" id="files" style="display:none;"/>
-                <button id="btnChoseImage" class="standardButton wideButton" style="display:none;">Upload Image</button>
-                <button id="btnRedo" class="standardButton wideButton" style="display:none;">Cancel</button>
+            <div id="divViewPhoto">
+                <img id="smallImage" src="" />
+                <button id="btnChoseImage" class="standardButton wideButton">Upload Image</button>
+                <button id="btnRedo" class="standardButton wideButton">Cancel</button>
             </div>
 
-            <div data-role="page">
-                <textarea id="txtDesc" rows='7' class="marginLeftAlign" style="display:none; width:90%;">Enter Description...</textarea>
-                <select id="selDirection" class="space marginLeftAlign dropDown" style="display:none;">
+            <div data-role="page" id="divUploadPhoto">
+                <textarea id="txtDesc" rows='7' class="marginLeftAlign">Enter Description...</textarea>
+                <select id="selDirection" class="space marginLeftAlign dropDown">
                     <option value="">Select a Direction...</option>
                     <option value="0">North</option>
                     <option value="1">North West</option>
@@ -100,9 +86,9 @@ under the License.
                     <option value="7">North East</option>
                     <option value="8">Unknown</option>
                 </select>
-                <input id="dateNow" type="date" class="marginLeftAlign dateControl" style="display:none;" />
-                <button id="submitImage" class="standardButton wideButton" style="display:none;" onclick="CommenceUpload()">Done</button>
-                <button id="btnCancel" class="standardButton wideButton" style="display:none;">Cancel</button>
+                <input id="dateNow" type="date" class="marginLeftAlign dateControl" />
+                <button id="submitImage" class="standardButton wideButton" onclick="CommenceUpload()">Done</button>
+                <button id="btnCancel" class="standardButton wideButton">Cancel</button>
             </div>
         </div>
     </body>

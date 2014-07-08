@@ -42,10 +42,39 @@ body
     display: none;
 }
 
+#ddlSites{
+    font: 16px Georgia, Serif !important;
+    border: 0;
+    margin: 0 auto;
+}
+
+.center{
+    width:100%;
+    
+}
+
 #divWrapper
 {
     width: 100%;
     height: 100%;
+}
+
+#divUploadPhoto{
+    display:none;
+}
+
+#txtDesc{
+    width:90%;
+}
+
+#divViewPhoto{
+    display:none;
+}
+
+#smallImage{
+    margin: 5px auto;
+    width:90%;
+    height:70%;
 }
 
 .space
