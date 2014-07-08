@@ -18,7 +18,34 @@ function id(element) {
     return document.getElementById(element);
 }
 
-//cordova loaded function, fire constructor
+//detect app enviornment
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+
+};
+
+//Notes:
+//both = normal application use
+//phonegap = method or code chunk used in phonegap uploader
+//non-phonegap = method or code chunk used with html file upload (IOS only)
+//phonegap loaded function, fire constructor
 function onDeviceReady() {
     cameraApp = new cameraApp();
     cameraApp.run();
@@ -29,17 +56,20 @@ function cameraApp() {
 
 cameraApp.prototype = {
     _pictureSource: null,
-    
     _destinationType: null,
     
     run: function() {
         var that = this;
         that._pictureSource = navigator.camera.PictureSourceType;
         that._destinationType = navigator.camera.DestinationType;
-        
-        id("cameraPhoto").addEventListener("change", function() {
-            that._onPhotoTaken.apply(that, arguments);
+        //phonegap
+        id("cameraPhoto").addEventListener("click", function() {
+            that._takePhoto.apply(that, arguments);
         });
+        //non-phonegap
+        /* id("cameraPhoto").addEventListener("change", function() {
+        that._onPhotoTaken.apply(that, arguments);
+        });*/
         id("btnChoseImage").addEventListener("click", function() {
             that._photoAccepted.apply(that, arguments);            
         });
@@ -51,21 +81,41 @@ cameraApp.prototype = {
         });	        
     },
    
-    _onPhotoTaken: function(event) {
-        if (event.target.files.length === 1 &&
-            event.target.files[0].type.indexOf("image/") === 0) {
-            var smallImage = id('smallImage');
-            //show selected photo
-            smallImage.style.display = "block";
-            smallImage.src = URL.createObjectURL(event.target.files[0]);
-            $('#divSiteSelection').hide();
-            id('btnChoseImage').style.display = "block";
-            id('btnRedo').style.display = "block";
-        }
+    //phonegap
+    _takePhoto: function() {
+        //fetch from library
+        var that = this;
+        navigator.camera.getPicture(function() {
+            that._onPhotoTaken.apply(that, arguments);
+        }, function() {
+            cameraApp._onFail.apply(that, arguments);
+        }, {
+                                        quality: 40,
+                                        destinationType: navigator.camera.FILE_URI,//cameraApp._destinationType.FILE_URI,
+                                        encodingType : navigator.camera.EncodingType.JPEG, 
+                                        targetWidth: 500,
+                                        targetHeight: 500,
+                                        saveToPhotoAlbum: 1,
+                                        sourceType: that._pictureSource.SAVEDPHOTOALBUM
+                                    });
+    },
+    
+    _onPhotoTaken: function(source) {
+        //nonphonegap
+        /* if (source.target.files.length === 1 &&
+        source.target.files[0].type.indexOf("image/") === 0) {*/
+        //used by both
+        var smallImage = id('smallImage');
+        smallImage.style.display = "block";
+        smallImage.src = source; //URL.createObjectURL(source.target.files[0]); //non-phonegap source
+        $('#divSiteSelection').hide();
+        id('btnChoseImage').style.display = "block";
+        id('btnRedo').style.display = "block";
+        //}
     },
    
-    _photoAccepted
-    : function() {
+    //both
+    _photoAccepted: function() {
         id('smallImage').style.display = "none";
         id('btnChoseImage').style.display = "none";
         id('btnRedo').style.display = "none";
@@ -77,8 +127,15 @@ cameraApp.prototype = {
         id('btnCancel').style.display = "block";
     },
     
-    _cancelCapture
-    : function() {
+    //both
+    _cancelCapture: function() {
+        document.getElementById('smallImage').src = "";
+        var desc = $("#txtDesc");
+        desc.val("");
+        var sel = $("#selDirection");
+        sel.val('0');
+        var date = $("#dateNow"); 
+        date.val("");
         id('smallImage').style.display = "none";
         id('btnChoseImage').style.display = "none";
         id('dateNow').style.display = "none";
@@ -87,141 +144,122 @@ cameraApp.prototype = {
         id('submitImage').style.display = "none";
         id('btnCancel').style.display = "none";
         id('btnRedo').style.display = "none";
-         $('#divSiteSelection').show();
-        /*id('lblCamera').style.display = "block";
-        id('lblStorage').style.display = "block";*/
+        $('#divSiteSelection').show();
     },
     
     _onFail
     : function(message) {
-        // setTimeout("alert('message');", 0);
+        //alert('message');
     }
 }
 
-function CommenceUpload() {
-    var files = id('cameraPhoto').files
-    if (typeof files !== "undefined") {
-        for (var i = 0, l = files.length; i < l; i++) {
-            UploadFile(files[i]);
-        }
-    }
+//non-phonegap
+/*function CommenceUpload() {
+var files = id('cameraPhoto').files
+if (typeof files !== "undefined") {
+for (var i = 0, l = files.length; i < l; i++) {
+UploadFile(files[i]);
+}
+}
 }
 
 function UploadFile(file) {
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", function () {//Image is on other side, may not be correkt
-        commitPhotoData(file.fileName);
-    }, false);
-    xhr.open('POST', 'http://10.10.11.89/JsonMobilePhoto/PhotoUpload.aspx', true);
-    xhr.setRequestHeader("Content-Type", "multipart/form-data");
-    xhr.setRequestHeader("X-File-Name", file.fileName);
-    xhr.setRequestHeader("X-File-Size", file.fileSize);
-    xhr.setRequestHeader("X-File-Type", file.type);
-    xhr.send(file);
+var xhr = new XMLHttpRequest();
+xhr.addEventListener("load", function () {//Image is on other side, may not be correkt
+commitPhotoData(fileName);
+}, false);
+var fileName = file.name;
+xhr.open('POST', 'http://10.10.11.81/JsonMobilePhoto/PhotoUpload.aspx', true);
+//xhr.open('POST', 'http://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx', true);
+xhr.setRequestHeader("Content-Type", "multipart/form-data");
+xhr.setRequestHeader("X-File-Name", file.name);
+xhr.setRequestHeader("X-File-Size", file.size);
+xhr.setRequestHeader("X-File-Type", file.type);
+xhr.send(file);
+}*/
+
+//phonegap
+var retries = 0;
+
+function CommenceUpload() {
+    var smallImage = id('smallImage');
+    var imgStr = smallImage.src.toString();
+    var fileName = imgStr.substring(imgStr.lastIndexOf("/") + 1);
+    
+    if (fileName.indexOf(".jpg") == -1)
+        fileName += ".jpg";
+    
+    var win = function() {
+        commitPhotoData(fileName);
+    }
+
+    var onFail = function(FileTransferError) {
+        if (retries === 0) {
+            retries ++
+            setTimeout(function() {
+                CommenceUpload();
+            }, 1000)
+        } else {
+            alert("An error has occurred: Code = " + FileTransferError.code);
+            switch (FileTransferError.code) { 
+                case '1': 
+                    console.log("Error Type: FILE_NOT_FOUND_ERR"); 
+                    break; 
+                case '2': 
+                    console.log("Error Type: INVALID_URL_ERR"); 
+                    break; 
+                case '3':
+                    console.log("Error Type: CONNECTION_ERR"); 
+                    break; 
+            } 
+            console.log("upload error source " + FileTransferError.source);
+            console.log("upload error target " + FileTransferError.target);	
+        }
+    }
+    
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = fileName;
+    options.mimeType = "image/jpeg";
+    options.chunkedMode = false;
+    options.headers = {
+        Connection: "close"
+    }
+    
+       var params = {};
+            params.fullpath = imgStr;
+            params.name = options.fileName;
+   options.params = params;
+    var ft = new FileTransfer();
+    //ft.upload(imgStr, encodeURI("http://10.10.11.81/JsonMobilePhoto/PhotoUpload.aspx"), win, onFail, options, true);
+    ft.upload(imgStr, "http://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx", win, onFail, options, true);
 }
 
+//both
 function commitPhotoData(fileName) {
     var directionKey = document.getElementById('selDirection').value;
     var desc = document.getElementById('txtDesc').value;
     var date = $('#dateNow').val();
     var ddlSites = $('#ddlSites').val();
-    //"http://monoservicetest.trihydro.com/MobilePhoto/PhotoService.svc/UploadPhoto",
     $.ajax({
                type: "GET",
-               url: "http://localhost/JsonMobilePhoto/PhotoService.svc/UploadPhotoInfo",
-               data: { projectKey: ddlSites, directionKey: directionKey, photographer: "Keith", description: desc, filename: fileName, token: token, date: date },
+        	   url: "http://monoservicetest.trihydro.com/MobilePhoto/PhotoService.svc/UploadPhoto",
+               //url: "http://10.10.11.81/JsonMobilePhoto/PhotoService.svc/UploadPhotoInfo",
+               headers: {'Authentication':token},
+               data: { projectKey: ddlSites, directionKey: directionKey, photographer: "Keith", description: desc, filename: fileName, date: date },
                contentType: "application/json; charset=utf-8",
                dataType: "json",
-               success: function () {
-                   alert("Your photo was successfully uploaded!");
-                   document.getElementById('smallImage').src = "";
-                   var desc = $("#txtDesc");
-                   desc.val("");
-                   var sel = $("#selDirection");
-                   sel.val('0');
-                   var date = $("#dateNow"); 
-                   date.val("");
-                   $('#btnCancel').click();                 
+               success: function (boolean) {
+                   if (boolean.d == true) {//boolean is an obj, .d is the returned bool value
+                       alert("Your photo was successfully uploaded!");
+                       $('#btnCancel').click(); 
+                   } else {
+                       alert("Hit Service, Failed to save Server Side.");
+                   }
                },
                error: function () {
                    $('#btnCancel').click();
-                   alert("there was an error");
+                   alert("Failed to send PhotoData.");
                },
            })
 }
-/*var retries = 0;
-function UploadData() {
-var smallImage = id('smallImage');
-var imgStr = smallImage.src.toString();
-	
-var win = function(r) {
-var directionKey = document.getElementById('selDirection').value;
-var desc = document.getElementById('description').value;
-var date = document.getElementById("dateNow").value;
-retries = 0;
-$.ajax({
-type: "GET",
-url: "http://monoservicetest.trihydro.com/MobilePhoto/PhotoService.svc/UploadPhoto",
-data: { projectKey: 0, directionKey: directionKey, photographer: "", description: desc, filename: fileName, token: token, date: date },
-contentType: "application/json; charset=utf-8",
-dataType: "json",
-success: function () {
-alert("Your photo was successfully uploaded!");
-document.getElementById('smallImage').src = "";
-var desc = $("#txtDesc");
-desc.val("");
-desc.style.display = "none";
-var sel = ("#selDirection");
-sel.val("0");
-var date = $("#dateNow"); 
-date.val("");
-date.style.display = "none";
-            
-document.getElementById('capturePhotoButton').style.display = "block";
-document.getElementById('getPhotoFromLibraryButton').style.display = "block";
-document.getElementById('getPhotoFromAlbumButton').style.display = "block";
-document.getElementById('btnSettings').style.display = "block";
-},
-error: function () {
-alert("there was an error");
-},
-})
-}
-
-var onFail = function(FileTransferError) {
-if (retries === 0) {
-retries ++
-setTimeout(function() {
-UploadData();
-}, 1000)
-} else {
-alert("An error has occurred: Code = " + FileTransferError.code);
-switch (FileTransferError.code) { 
-case '1': 
-console.log("Error Type: FILE_NOT_FOUND_ERR"); 
-break; 
-case '2': 
-console.log("Error Type: INVALID_URL_ERR"); 
-break; 
-case '3':
-console.log("Error Type: CONNECTION_ERR"); 
-break; 
-} 
-console.log("upload error source " + FileTransferError.source);
-console.log("upload error target " + FileTransferError.target);	
-}
-}
-    
-var options = new FileUploadOptions();
-options.fileKey = "file";
-options.fileName = imgStr.substring(imgStr.lastIndexOf("/") + 1);
-options.mimeType = "image/jpeg";
-options.chunkedMode = false;
-options.headers = {
-}
-fileName = imgStr.substring(imgStr.lastIndexOf("/") + 1) + ".jpg";
-var ft = new FileTransfer();
-ft.upload(imgStr, "https://monoservicetest.trihydro.com/MobilePhoto/PhotoUpload.aspx/", win, onFail, options, true);
-//http://localhost/JsonMobilePhoto/PhotoUpload.aspx
-}
-*/
