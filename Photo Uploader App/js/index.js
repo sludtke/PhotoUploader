@@ -63,13 +63,13 @@ cameraApp.prototype = {
         that._destinationType = navigator.camera.DestinationType;
         //phonegap
         $('#cameraPhoto').bind("click", function() {
-            that._takePhoto.apply(that, arguments);
+            that._fetchPhoto.apply(that, arguments);
+        });
+         $('#btnTakeImage').bind("click", function(){
+           that._takePhoto.apply(that, arguments);
         });
         $('#btnChoseImage').bind("click", function() {
             that._photoAccepted.apply(that, arguments);            
-        });
-        $('#btnTakeImage').bind("click", function(){
-           that._capturePhoto.apply(that, arguments);
         });
         $('#btnRedo').bind("click", function() {
             that._cancelCapture.apply(that, arguments);            
@@ -80,7 +80,7 @@ cameraApp.prototype = {
     },
    
     //phonegap
-    _takePhoto: function() {
+    _fetchPhoto: function() {
         //fetch from library
         var that = this;
         navigator.camera.getPicture(function() {
@@ -92,6 +92,22 @@ cameraApp.prototype = {
                 destinationType: navigator.camera.FILE_URI,
                 encodingType : navigator.camera.EncodingType.JPEG, 
                 sourceType: that._pictureSource.SAVEDPHOTOALBUM
+            });
+    },
+    
+     _takePhoto: function() {
+        var that = this;
+        
+        // Take picture using device camera and retrieve image as base64-encoded string.
+          navigator.camera.getPicture(function() {
+            that._onPhotoTaken.apply(that, arguments);
+        }, function() {
+            cameraApp._onFail.apply(that, arguments);
+        }, {
+                quality: 40,
+                destinationType: navigator.camera.FILE_URI,
+                encodingType : navigator.camera.EncodingType.JPEG, 
+                sourceType: that._pictureSource.CAMERA
             });
     },
     
@@ -108,19 +124,6 @@ cameraApp.prototype = {
         $('#divViewPhoto').hide();
         $('#divUploadPhoto').show();
         $('#dateNow').valueAsDate = new Date().today();
-    },
-    
-    _capturePhoto: function() {
-        var that = this;
-        
-        // Take picture using device camera and retrieve image as base64-encoded string.
-        navigator.camera.getPicture(onPhotoDataSuccess,
-        function(){
-            that._onFail.apply(that,arguments);
-        },{
-            quality: 50,
-            destinationType: that._destinationType.DATA_URL
-        });
     },
     
     _cancelCapture: function() {
