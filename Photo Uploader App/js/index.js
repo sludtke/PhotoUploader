@@ -119,7 +119,7 @@ cameraApp.prototype = {
             that._onFail.apply(that,arguments);
         },{
             quality: 50,
-            destinationType: that._destinationType.DATA_URL
+            destinationType: that._destinationType.FILE_URL
         });
     },
     
@@ -143,7 +143,7 @@ var retries = 0;
 
 function onPhotoDataSuccess(imageData){
     $('#smallImage').show();
-    $('#smallImage').attr("src", "data:image/jpeg;base64," + imageData);
+    $('#smallImage').attr("src", imageData);//"data:image/jpeg;base64,"
     $('#divSiteSelection').hide();
     $('#divViewPhoto').show();
 }
